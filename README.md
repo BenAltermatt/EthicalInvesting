@@ -1,2 +1,2 @@
-# EthicalInvesting
+# Ethical_Investing
 HackDuke entry
