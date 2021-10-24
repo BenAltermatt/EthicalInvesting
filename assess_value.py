@@ -9,8 +9,10 @@ import scipy.optimize
 from matplotlib import pyplot
 import requests
 from csv import DictReader
-    # iterate over each line as a ordered dictionary
-    
+from lmfit.models import ExpressionModel
+
+# Parses through all tickers in a csv file sourced from the NASDAQ 
+# and determines a Key Performance Indicator (KPI) for each security
 def parse_thru_tickers():
     out = dict()
     with open('nasdaq_screener.csv', 'r') as read_obj:
@@ -22,12 +24,13 @@ def parse_thru_tickers():
                 break
 
     return out
-
+# Exponential Function
 def func(x, a, b, c):
 	return a*np.exp(b*x) + c
-    
+
+# Input is a ticker - outputs a KPI calculated
+# by using an Exponential regression
 def lin_reg_ticker(t):
-    print(t)
     x = list()
     y = list() 
     i = 0
@@ -42,14 +45,22 @@ def lin_reg_ticker(t):
         i = i+1
     x_arr = np.array(x)
     y_arr = np.array(y)
+    
     sigma = np.ones(len(y_arr)) * 0.5 
     p0 = (1, -1, -1)
+    
     try:
-        popt, _ = scipy.optimize.curve_fit(func,  x_arr,  y_arr, p0, sigma = sigma ,absolute_sigma=True )
+        # Weighted Exponential Regression
+        exponential_model = ExpressionModel("a * exp(b * x) + c", ["x"], None, 'omit' )
+        fitted_model = exponential_model.fit(y_arr, x=x_arr, a=5, b=1, c=1)
+        KPI = fitted_model.params['a'].value
+        return KPI
+        
     except: 
         return -1;
-    KPI, b, c = popt
-   
+    # KPI, b, c = popt
+    # print(KPI)
+
     # To print a plot of the linear regression  
     #     
     # pyplot.scatter(x_arr,y_arr)
@@ -57,7 +68,8 @@ def lin_reg_ticker(t):
     # y_line = func(x_line, a, b, c)
     # pyplot.plot(x_line, y_line, '--', color='red')
     # pyplot.savefig("plot")
-    print(KPI)
+    
     return KPI
 
-g = parse_thru_tickers()
+if __name__ == "__main__":
+    parse_thru_tickers()
