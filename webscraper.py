@@ -4,21 +4,21 @@ import requests
 import time as t
 import pickle
 from bs4 import BeautifulSoup as bs
+from csv import DictReader
 
 def generateAllCards(tickerFile):
     # read the file
-    tickerstrings = list()
     tickers = list()
-    file = open(tickerFile)
     try:
-        tickerstrings = file.readlines()
-        for x in range(len(tickerstrings)):
-            ticker = tickerstrings[x][:tickerstrings[x].find(',')]
-            if ticker.find('^') == -1:
-                tickers.append(ticker)
+        with open(tickerFile, 'r') as read_obj:
+            reader = DictReader(read_obj)
+            for x in reader:
+                ticker = x['Symbol']
+                if ticker.find('^') == -1:
+                    tickers.append(ticker)
 
     finally:
-        file.close()
+        read_obj.close()
 
     cards = dict()
 
@@ -118,6 +118,9 @@ def getFifthChar(ticker):
     extensions = ['O', 'K']
     finalTicker = ticker
 
+    for x in range(65, 65 + 26):
+        extensions.append(chr(x))
+
     if(len(requests.get('https://www.refinitiv.com/bin/esg/esgsearchresult?ricCode=' + ticker).text) > 2): #no add on
         return ticker
 
@@ -128,8 +131,8 @@ def getFifthChar(ticker):
     return -1 # no data found for this ticker
 
 def main():
-    final = generateAllCards('stocks.txt')
-    pickle_out = open("scorecards.pickle","wb")
+    final = generateAllCards('snp500.csv')
+    pickle_out = open("scorecardsshorter.pickle","wb")
     pickle.dump(final, pickle_out)
     pickle_out.close()
     return

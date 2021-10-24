@@ -1,8 +1,7 @@
 import pickle
 import sys
-import heapq
 
-pickle_in = open('scorecards.pickle', 'rb')
+pickle_in = open('scorecardsshorter.pickle', 'rb')
 cards = pickle.load(pickle_in)
 
 def buildHeap():
@@ -10,7 +9,7 @@ def buildHeap():
 
 
 def main():
-    return
+    print(cards)
 
 if __name__ == "__main__":
     main()
