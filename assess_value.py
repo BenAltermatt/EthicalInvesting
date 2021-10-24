@@ -44,7 +44,10 @@ def lin_reg_ticker(t):
     y_arr = np.array(y)
     sigma = np.ones(len(y_arr)) * 0.5 
     p0 = (1, -1, -1)
-    popt, _ = scipy.optimize.curve_fit(func,  x_arr,  y_arr, p0, sigma = sigma ,absolute_sigma=True )
+    try:
+        popt, _ = scipy.optimize.curve_fit(func,  x_arr,  y_arr, p0, sigma = sigma ,absolute_sigma=True )
+    except: 
+        return -1;
     KPI, b, c = popt
    
     # To print a plot of the linear regression  
