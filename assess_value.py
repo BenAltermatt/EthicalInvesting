@@ -3,19 +3,17 @@
 
 import yfinance as yf
 import numpy as np
-from numpy import sin
-from numpy import arange
-import scipy.optimize
-from matplotlib import pyplot
-import requests
+# from numpy import arange
+# from matplotlib import pyplot
 from csv import DictReader
+import pickle
 from lmfit.models import ExpressionModel
 
 # Parses through all tickers in a csv file sourced from the NASDAQ 
 # and determines a Key Performance Indicator (KPI) for each security
 def parse_thru_tickers():
     out = dict()
-    with open('nasdaq_screener.csv', 'r') as read_obj:
+    with open('snp500.csv', 'r') as read_obj:
         reader = DictReader(read_obj)
         for row in reader:
             try:
@@ -65,4 +63,7 @@ def lin_reg_ticker(t):
     return KPI
 
 if __name__ == "__main__":
-    parse_thru_tickers()
+    out = parse_thru_tickers()
+    pickle_out = open("KPIs.pickle","wb")
+    pickle.dump(out, pickle_out)
+    pickle_out.close()
