@@ -43,11 +43,6 @@ def lin_reg_ticker(t):
             y.append(row['Low'])
             x.append(i)
         i = i+1
-    x_arr = np.array(x)
-    y_arr = np.array(y)
-    
-    sigma = np.ones(len(y_arr)) * 0.5 
-    p0 = (1, -1, -1)
     
     try:
         # Weighted Exponential Regression
@@ -58,8 +53,6 @@ def lin_reg_ticker(t):
         
     except: 
         return -1;
-    # KPI, b, c = popt
-    # print(KPI)
 
     # To print a plot of the linear regression  
     #     
