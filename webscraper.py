@@ -23,17 +23,20 @@ def generateAllCards(tickerFile):
     cards = dict()
 
     og_time = t.time()
-    for tickval in range(len(tickers)):
-        card = generateScorecard(tickers[tickval])
-        print(str((tickval + 1) / len(tickers) * 100) + "% Complete")
-        deltat = t.time() - og_time
-        est_time = (len(tickers) - tickval - 1) * deltat / (tickval + 1)
-        print('Estimated time remaining: ' + str(est_time) + ' seconds')
-        if card is not None:
-            cards[tickval] = card
+    try:
+        for tickval in range(len(tickers)):
+            card = generateScorecard(tickers[tickval])
+            print(str((tickval + 1) / len(tickers) * 100) + "% Complete")
+            deltat = t.time() - og_time
+            est_time = (len(tickers) - tickval - 1) * deltat / (tickval + 1)
+            print('Estimated time remaining: ' + str(est_time) + ' seconds')
+            if card is not None:
+                cards[tickers[tickval]] = card
+    except KeyboardInterrupt:
+        return cards
 
 
-    print(cards)
+    return cards
 
 
 def findTickers():
