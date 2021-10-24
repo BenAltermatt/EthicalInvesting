@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>Website Name</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav  class="navbar">
+      <div class="navbar__container">
+        <div class="logo__container">
+          <img src="logo.png" alt="Logo Picture"class="img-logo">
+          <a href="/" id="navbar__logo">ETHINVEST</a>
+          <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+        <ul class="navbar__menu">
+          <li class="navbar__item">
+            <a href="/" class="navbar__links"> HOME </a>
+          </li>
+          <li class="navbar__item">
+            <a href="/mission.html" class="navbar__links"> MISSION </a>
+          </li>
+          <li class="navbar__item">
+            <a href="/list.html" class="navbar__links"> LISTING </a>
+          </li>
+          <li class="navbar__item">
+            <a href="/profile.html" class="navbar__links"> PROFILE </a>
+          </li>
+
+          
+          <!-- <li class="navbar__btn"><a href="/"
+            class="button">Butt</a></li> -->
+        </ul>
+      </div>
+    </nav>
+    <h2> COMPANY LIST </h2>
+    <h3> Toggle ESS Score </h3>
+    <div class="slidecontainer">
+      <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+    </div>
+    <p class="slider__text">Score: <span id="slider__value"></span></p>
+    <a href="" class="clickable"> Advanced Search </a>
+    <button onclick="generateProfile()" class="button">Generate Profile</button>
+
+    <script src="list.js"></script>
+
+    <div class="footer__container">
+      <div class="footer__links">
+        <div class="footer__link--wrapper">
+          <div class="footer__link--items">
+            <h2 class="footer_h2">About Us</h2>
+            <a href="" class="ahref">How It Works</a>
+            <a href="">Testimonials</a>
+            <a href="">Careers</a>
+            <a href="">Investments</a>
+            <a href="">Terms of Service</a>
+          </div>
+          <div class="footer__link--items">
+            <h2 class="footer_h2">Contact Us</h2>
+            <a href="">Contact</a>
+            <a href="">Support</a>
+            <a href="">Destinations</a>
+          </div>
+          <div class="footer__link--items">
+            <h2 class="footer_h2">Social Media</h2>
+            <a href="">Facebook</a>
+            <a href="">Instagram</a>
+            <a href="">Twitter</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
