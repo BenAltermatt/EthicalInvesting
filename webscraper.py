@@ -6,8 +6,10 @@ from bs4 import BeautifulSoup as bs
 def generateScorecard(tickVal):
     card = dict()
 
-    page = requests.get('https://www.refinitiv.com/bin/esg/esgsearchresult?ricCode=' + tickVal)
-    
+    realTick = getFifthChar(tickVal)
+
+    page = requests.get('https://www.refinitiv.com/bin/esg/esgsearchresult?ricCode=' + realTick)
+
     # there are 14 scores
     index = 0
     toBeParsed = page.text
@@ -38,6 +40,7 @@ def parseScore(string): # read the score out and bring back the rest of the stri
 def parseCategory(string): # get the category
     substr = ''
     endpoint = string.find('"')
+
     # we need to adjust correctly for TR. vs TR.TRESG
     if string[:endpoint].find('TRES') != -1: # uses TRES
         substr = string[8:endpoint]
@@ -53,9 +56,27 @@ def parseCategory(string): # get the category
     
     return retstr, string[endpoint]
 
+def getFifthChar(ticker):
+    finalTicker = ticker
+
+    if(len(requests.get('https://www.refinitiv.com/bin/esg/esgsearchresult?ricCode=' + ticker).text) > 2): #no add on
+        return ticker
+    
+    if(len(requests.get('https://www.refinitiv.com/bin/esg/esgsearchresult?ricCode=' + ticker + '.O').text) > 2): # common O add on
+        return ticker + '.O'
+
+    for x in range(65, 65 + 26):
+        if(len(requests.get('https://www.refinitiv.com/bin/esg/esgsearchresult?ricCode=' + ticker + '.' + chr(x)).text) > 2): # common O add on
+            return ticker + '.' + chr(x)
+
+    
+
+    
+
+
 
 def main():
-    print(generateScorecard('TWTR.K'))
+    print(generateScorecard('GOOGL'))
     return
 
 if __name__ == "__main__":
