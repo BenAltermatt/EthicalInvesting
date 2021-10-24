@@ -7,7 +7,14 @@ slider.oninput = function() {
   output.innerHTML = this.value;
 }
 
-generateProfile()
-{
-  
-}
+function generateProfile() {
+  alert('aaaa');
+  }
+  document.getElementById("scriptButton").addEventListener("click", hello);
+
+// object.onclick = generateProfile()
+// {
+//   window.alert( "aaa" );
+// };
+
+document.getElementById("scriptButton").addEventListener("click", generateProfile);
