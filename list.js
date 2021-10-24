@@ -8,8 +8,11 @@ slider.oninput = function() {
 }
 
 function generateProfile() {
-  alert('aaaa');
-  }
+  // alert('aaaa');
+  document.getElementById("demo").innerHTML = 
+  "- Alpha Metallurgical Resources In</br> - Cvr Partners LP</br> - Alpha Asana Inc Cl A</br> - Aehr Test Systems</br> - Sm Energy Company</br> - Silverbow Resources Inc</br> - Urban One Inc</br> - Weatherford International Plc</br> - Avis Budget Group</br> - Consol Energy Inc</br>";
+      }
+
   document.getElementById("scriptButton").addEventListener("click", hello);
 
 // object.onclick = generateProfile()
