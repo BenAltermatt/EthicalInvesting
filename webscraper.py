@@ -69,11 +69,6 @@ def getFifthChar(ticker):
         if(len(requests.get('https://www.refinitiv.com/bin/esg/esgsearchresult?ricCode=' + ticker + '.' + chr(x)).text) > 2): # common O add on
             return ticker + '.' + chr(x)
 
-    
-
-    
-
-
 
 def main():
     print(generateScorecard('GOOGL'))
@@ -81,6 +76,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 """
 page.content -> html of the page in a string
