@@ -40,13 +40,19 @@
       </div>
     </nav>
     <h2> COMPANY LIST </h2>
-    <h3> Toggle ESS Score </h3>
+    <h3> Toggle Weighting </h3>
     <div class="slidecontainer">
       <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
     </div>
+
+    <div class="slideweights">
+      <i class="left-weight">Profit</i>
+      <i class="right-weight">Ethics</i>
+    </div>
+
     <p class="slider__text">Score: <span id="slider__value"></span></p>
     <a href="" class="clickable"> Advanced Search </a>
-    <button onclick="generateProfile()" class="button">Generate Profile</button>
+    <button id='scriptButton' name="scriptbutton" value=" Run Script " onclick="generateProfile(); exec('python profilebuilder.py');" class="button">Generate Profile</button>
 
     <script src="list.js"></script>
 

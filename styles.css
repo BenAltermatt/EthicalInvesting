@@ -339,3 +339,14 @@ h3 {
   background: #6dcfe7;
   transition: all 0.3s ease;
 }
+
+.slideweights {
+  margin-top: 10px;
+  margin-left: 60px;
+  margin-right: auto;
+  color:#252c47;
+  width: 30%;
+  display:flex;
+  justify-content: space-between;
+  align-items: space-between;
+}
